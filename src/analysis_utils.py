@@ -5,7 +5,6 @@ import pandas as pd
 
 def split_mitocheck_features(
     profile: pd.DataFrame,
-    metadata_tag: Optional[bool] = False,
     feature_type: Optional[list[str]] = ["CP", "DP"],
 ) -> Tuple[list[str], list[str]]:
     """splits metadata and feature columns
@@ -25,8 +24,6 @@ def split_mitocheck_features(
     allowed_feature_types = ["CP", "DP"]
     if not isinstance(profile, pd.DataFrame):
         raise TypeError("'profile' must be a dataframe")
-    if not isinstance(metadata_tag, bool):
-        raise TypeError("'metadata_tag' must be a bool type")
     if not isinstance(feature_type, list):
         raise TypeError("'feature_type' must be a list containing strings")
     if any([isinstance(item, str) for item in feature_type]):
