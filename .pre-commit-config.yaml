@@ -1,0 +1,52 @@
+repos:
+  # Remove unused imports
+  - repo: https://github.com/hadialqattan/pycln.git
+    rev: v2.4.0
+    hooks:
+      - id: pycln
+
+  # Import formatter with black configurations
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: isort (python)
+        args: ["--profile", "black", "--filter-files"]
+        language_version: python3.10
+
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: "1.16.0"  # Replace with latest tag on GitHub
+    hooks:
+      - id: blacken-docs
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.1
+    hooks:
+      - id: ruff
+        name: ruff
+        types_or: [python, pyi, jupyter]
+        args: [--fix]
+      - id: ruff-format
+        name: ruff-format
+        types_or: [python, pyi, jupyter]
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.8.5
+    hooks:
+      - id: nbqa-isort
+        args: ["--float-to-top"]
+
+  # Additional hooks found within the pre-commit lib
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+        args:
+          - "--fix=lf"
+      - id: pretty-format-json
+        args:
+          - "--autofix"
+          - "--indent=4"
+          - "--no-sort-keys"
+      - id: end-of-file-fixer

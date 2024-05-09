@@ -1,4 +1,5 @@
 from typing import Optional, Tuple
+
 import pandas as pd
 
 
@@ -6,8 +7,8 @@ def split_mitocheck_features(
     profile: pd.DataFrame,
     metadata_tag: Optional[bool] = False,
     feature_type: Optional[list[str]] = ["CP", "DP"],
-)-> Tuple[list[str], list[str]]:
-    """splits metadata and feature columns 
+) -> Tuple[list[str], list[str]]:
+    """splits metadata and feature columns
 
     Parameters
     ----------
@@ -32,7 +33,7 @@ def split_mitocheck_features(
         print("eww")
     if not all(entry in allowed_feature_types for entry in feature_type):
         raise TypeError("'feature_type' most only containg 'CP', 'DP' or both")
-    
+
     meta_features = []
     features = []
     for colname in profile.columns.tolist():
@@ -42,5 +43,5 @@ def split_mitocheck_features(
             features.append(colname)
         else:
             meta_features.append(colname)
-            
+
     return (meta_features, features)
