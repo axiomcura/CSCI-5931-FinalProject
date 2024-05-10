@@ -18,7 +18,6 @@ Integrating cell division stages into drug screening enhances accuracy and repro
 Prioritizing compounds based on cell division stages optimizes resource allocation and accelerates drug development pipelines.
 Ultimately, this contributes to improving public health outcomes by enabling the development of safer and more efficacious drugs, addressing unmet medical needs, and enhancing patient care and quality of life.
 
-
 We utilized the MitoCheck dataset, available [here](https://zenodo.org/records/7967386), which contains labeled datasets spanning various stages of the cell cycle.
 For details on data generation and labeling methodologies, please refer to the corresponding [paper](https://pubmed.ncbi.nlm.nih.gov/20360735/).
 
@@ -67,16 +66,52 @@ For insights into data processing, splitting, and model training, please consult
 
 ### Using the Cell States Identifier Script
 
-_**This assums that you have downloaded the package into your computer**_
+_**Assuming you have downloaded the package onto your computer**_
 
+In this tutorial, we'll work with demo_data.csv, a small image-based profile containing quantified morphological features.
 
+Let's dive into using the script:
 
+To verify a successful installation, access the script's help documentation:
 
+```bash
+python cell_states_identifier.py -h
+```
 
+This will display available parameters:
 
+```bash
+Predict cellular states probabilities from an image-based profile.
 
+Options:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        Input image-based profile file
+  -o OUTNAME, --outname OUTNAME
+                        Output file name for saving the predicted probabilities
+```
 
+With the installation confirmed, let's use the script with demo data and set an output name:
 
+```bash
+python cell_states_identifier.py -i demo_data.csv -o exp_1_test
+```
+
+Upon execution, the script generates several files in a './results' folder:
+
+- `exp_1_test_predicted_states.csv`: Contains the predicted cellular states
+- `exp_1_test_population_proportions.csv`: Indicates the composition of cellular states within the dataset
+- `exp_1_test_proportion_plot.png`: Provides a pie chart visualizing the proportion of cellular states within the population of cells.
+
+To view the plot generate, type:
+
+```bash
+open results/exp_1_test_proportion_plot.png
+```
+This will display the plot generated:
+![Porportion-Plot](sample_figs/exp_1_test_porportion_plot.png)
+
+Congratulations! Now you know the current cell stages your cells are in!
 
 ## Development technologies used
 
