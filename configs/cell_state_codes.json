@@ -1,0 +1,38 @@
+{
+    "encoder": {
+        "Large": 0,
+        "Prometaphase": 1,
+        "Grape": 2,
+        "Interphase": 3,
+        "Apoptosis": 4,
+        "ADCCM": 5,
+        "Folded": 6,
+        "SmallIrregular": 7,
+        "Polylobed": 8,
+        "Metaphase": 9,
+        "Binuclear": 10,
+        "Hole": 11,
+        "Anaphase": 12,
+        "MetaphaseAlignment": 13,
+        "Elongated": 14,
+        "OutOfFocus": 15
+    },
+    "decoder": {
+        "0": "Large",
+        "1": "Prometaphase",
+        "2": "Grape",
+        "3": "Interphase",
+        "4": "Apoptosis",
+        "5": "ADCCM",
+        "6": "Folded",
+        "7": "SmallIrregular",
+        "8": "Polylobed",
+        "9": "Metaphase",
+        "10": "Binuclear",
+        "11": "Hole",
+        "12": "Anaphase",
+        "13": "MetaphaseAlignment",
+        "14": "Elongated",
+        "15": "OutOfFocus"
+    }
+}

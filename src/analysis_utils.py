@@ -1,5 +1,6 @@
 from typing import Optional, Tuple
 
+import matplotlib.pyplot as plt
 import pandas as pd
 
 
@@ -26,7 +27,7 @@ def split_mitocheck_features(
         raise TypeError("'profile' must be a dataframe")
     if not isinstance(feature_type, list):
         raise TypeError("'feature_type' must be a list containing strings")
-    if any([isinstance(item, str) for item in feature_type]):
+    if not any([isinstance(item, str) for item in feature_type]):
         print("eww")
     if not all(entry in allowed_feature_types for entry in feature_type):
         raise TypeError("'feature_type' most only containg 'CP', 'DP' or both")
@@ -42,3 +43,48 @@ def split_mitocheck_features(
             meta_features.append(colname)
 
     return (meta_features, features)
+
+
+def plot_history(history):
+    """Plot training and validation loss, as well as training and validation
+    accuracy over epochs.
+
+    Parameters
+    ----------
+    history : keras.callbacks.History
+        A Keras History object containing training and validation metrics.
+
+    Returns
+    -------
+    None
+        This function does not return anything. It plots the training and
+        validation metrics using Matplotlib.
+    """
+    # Extracting training history
+    train_loss = history.history["loss"]
+    val_loss = history.history["val_loss"]
+    train_accuracy = history.history["accuracy"]
+    val_accuracy = history.history["val_accuracy"]
+    epochs = range(1, len(train_loss) + 1)
+
+    # Plotting loss
+    plt.figure(figsize=(12, 5))
+    plt.subplot(1, 2, 1)
+    plt.plot(epochs, train_loss, "b", label="Training loss")
+    plt.plot(epochs, val_loss, "r", label="Validation loss")
+    plt.title("Training and Validation Loss")
+    plt.xlabel("Epochs")
+    plt.ylabel("Loss")
+    plt.legend()
+
+    # Plotting accuracy
+    plt.subplot(1, 2, 2)
+    plt.plot(epochs, train_accuracy, "b", label="Training accuracy")
+    plt.plot(epochs, val_accuracy, "r", label="Validation accuracy")
+    plt.title("Training and Validation Accuracy")
+    plt.xlabel("Epochs")
+    plt.ylabel("Accuracy")
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
