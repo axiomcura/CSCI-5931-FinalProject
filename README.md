@@ -8,20 +8,74 @@ Here are the directories in the project along with their purposes:
 | data        | Dataset storage and other data files.          |
 | notebooks   | Jupyter notebooks illustrating the workflow used to train the model.|
 | src         | Source code containing utility functions.      |
-| docs        | Documentation files for the project.           |
 
 ## About
 
-## Motivation
+We're developing a neural network model to identify different stages of cell division, aiming to enhance drug discovery.
+This includes major stages like prophase, metaphase, anaphase, telophase, and cytokinesis, as well as intermediary states.
+Understanding these stages can deepen our insight into cellular interactions with treatments, potentially leading to novel drug targets and more effective treatments.
+Integrating cell division stages into drug screening enhances accuracy and reproducibility, fostering confidence in research findings.
+Prioritizing compounds based on cell division stages optimizes resource allocation and accelerates drug development pipelines.
+Ultimately, this contributes to improving public health outcomes by enabling the development of safer and more efficacious drugs, addressing unmet medical needs, and enhancing patient care and quality of life.
 
-## Setup
+
+We utilized the MitoCheck dataset, available [here](https://zenodo.org/records/7967386), which contains labeled datasets spanning various stages of the cell cycle.
+For details on data generation and labeling methodologies, please refer to the corresponding [paper](https://pubmed.ncbi.nlm.nih.gov/20360735/).
+
+## Installation
+
+To get started, follow these steps:
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/axiomcura/CSCI-5931-FinalProject.git
+    cd CSCI-5931-FinalProject
+    ```
+
+2. **Create a Conda environment:**
+
+    ```bash
+    conda create --name cell_classifier python=3.11
+    conda activate cell_classifier
+    ```
+
+3. **Install dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ## Usage
 
-### Training the model
+### Design and Training the model
+
+Below is the design of our neural network model:
+
+1. Input Layer: Receives data, sized according to the desired number of categories.
+2. Two Hidden Layers: The primary processing units. The first layer comprises 512 neurons, utilizing ReLU activation function for effective processing and including a dropout layer to prevent overfitting. The second hidden layer mirrors the first but with 256 neurons.
+3. Output Layer: Provides the system's answer, with one neuron per category. Utilizes softmax to convert raw guesses into probabilities.
+4. Training: Utilizes the Adam optimizer to adjust the learning rate. Model performance is evaluated using accuracy, indicating the frequency of correct answers.
+
+The neural network mode was training spliting the data set 80/20 training and testing respectivly.
+The model was trained for 25 epcosh with a batch size of 35
+
+The neural network model was trained using an 80/20 split for training and testing data, respectively.
+It underwent 25 epochs with a batch size of 35.
+
+For insights into data processing, splitting, and model training, please consult the sub-modules located in the `./notebooks` directory.
+
+### Using the Cell States Identifier Script
+
+_**This assums that you have downloaded the package into your computer**_
 
 
-### Using the
+
+
+
+
+
+
 
 
 ## Development technologies used
