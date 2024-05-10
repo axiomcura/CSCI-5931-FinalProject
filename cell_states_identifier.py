@@ -88,16 +88,27 @@ def predict_probabilities(model: Model, profile: pd.DataFrame) -> pd.DataFrame:
     return proba_df
 
 
-def plot_proportion(proba_df: pd.DataFrame, save_path: str | pathlib.Path) -> None:
+def plot_proportion(proba_df: pd.DataFrame, outname: str) -> None:
     """plots the proportion of cell states within the given dataset as a pie chart.
 
     Parameters
     ----------
     proba_df : pd.DataFrame
         probabilities
-    save_path : str | pathlib.Path
-        where to save the file
+    outname : str | pathlib.Path
+        name of the output file
     """
+
+    # type checking
+    if not isinstance(proba_df, pd.DataFrame):
+        raise TypeError("Parameter 'proba_df' must be a pandas DataFrame.")
+    if not isinstance(outname, str):
+        raise TypeError("Parameter 'outname' must be a string")
+
+    # creating save path
+    plot_save_path = (
+        pathlib.Path("./results/").resolve() / f"{outname}_porportion_plot.png"
+    )
 
     # create counts of the predicted states
     label_counts = proba_df["predicted_state"].value_counts()
@@ -110,7 +121,8 @@ def plot_proportion(proba_df: pd.DataFrame, save_path: str | pathlib.Path) -> No
     plt.title("Distribution of Predicted Labels", pad=20, fontweight="bold")
     plt.axis("equal")
     plt.legend(loc="upper left", bbox_to_anchor=(1, 1))
-    plt.show()
+    plt.savefig(plot_save_path)
+    print(f"MESSAGE: Proportion plot saved at: {plot_save_path}")
 
 
 def save_results(proba_df: pd.DataFrame, outname: str) -> None:
@@ -160,14 +172,23 @@ def save_results(proba_df: pd.DataFrame, outname: str) -> None:
 
 
 def main(image_profile: pd.DataFrame, outname: str) -> None:
-    """_summary_
+    """Generate predictions for cellular states from image profiles.
+
+    This function takes in a csv file containing image-based profiles and predicts the cellular states
+    using a trained Neural Network model. It then saves the predicted states and their
+    corresponding probabilities.
 
     Parameters
     ----------
-    css_file : _type_
-        _description_
-    out_file : _type_
-        _description_
+    image_profile : pd.DataFrame
+        CSV file containing image profiles, where each row represents a cell and each column
+        represents a feature of the cell.
+    outname : str
+        Name used for saving the results.
+
+    Returns
+    -------
+    None
     """
     # loaded pre-trained model
     model_path = pathlib.Path(
@@ -181,11 +202,11 @@ def main(image_profile: pd.DataFrame, outname: str) -> None:
     # Perform prediction using the loaded model
     probabilities = predict_probabilities(model, loaded_profile)
 
-    # plot the proportions of cell states
-    plot_proportion(proba_df=probabilities, save_path=outname)
-
     # Save the results
     save_results(probabilities, outname)
+
+    # plot the proportions of cell states
+    plot_proportion(proba_df=probabilities, outname=outname)
 
 
 if __name__ == "__main__":
