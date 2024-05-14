@@ -1,4 +1,4 @@
-# CSCI-5931-FinalProject
+# CytoState: Unraveling Cell Division Dynamics with Neural Networks
 
 Here are the directories in the project along with their purposes:
 
@@ -64,7 +64,7 @@ It underwent 25 epochs with a batch size of 35.
 
 For insights into data processing, splitting, and model training, please consult the sub-modules located in the `./notebooks` directory.
 
-### Using the Cell States Identifier Script
+### Using the Cell States Identifier Script (cyto_state.py)
 
 _**Assuming you have downloaded the package onto your computer**_
 
@@ -94,7 +94,7 @@ Options:
 With the installation confirmed, let's use the script with demo data and set an output name:
 
 ```bash
-python cell_states_identifier.py -i demo_data.csv -o exp_1_test
+python cyto_state.py -i demo_data.csv -o exp_1_test
 ```
 
 Upon execution, the script generates several files in a './results' folder:
